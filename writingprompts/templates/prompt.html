@@ -1,2 +1,12 @@
-<p>Prompt</p>
-{{ request.session.prompt_list }}
+<ul>{{ prompt }}</ul>
+<ul>PK: {{ prompt.pk }}</ul>
+<ul>Title: {{ prompt.title }}</ul>
+<ul>Content: {{ prompt.content }}</ul>
+
+{% for story in story_list %}
+<ul>Story: {{ story }}</ul>
+<ul>{{ story.pk }}</ul>
+{% endfor %}
+{{ request.session.is_story }}
+
+<a href="{% url 'writingprompts:new_story' prompt.pk%}">New Story</a>

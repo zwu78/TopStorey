@@ -1,0 +1,9 @@
+<p>{{ prompt }}</p>
+<p>PK {{ prompt.pk }}</p>
+<p>Content: {{ prompt.content }}</p>
+
+<ul>{{ story }}</ul>
+<ul>PK: {{ story.pk }}</ul>
+<ul>Content: {{ story.content }}</ul>
+{{ request.session.is_story }}
+<a href="{% url 'writingprompts:new_story' story.pk%}">New Story</a>
