@@ -4,8 +4,8 @@
 <ul>Content: {{ prompt.content }}</ul>
 
 {% for story in story_list %}
-<ul>Story: {{ story }}</ul>
-<ul>{{ story.pk }}</ul>
+<ul><a href="{% url 'writingprompts:story' prompt.pk story.pk %}"</a>{{ story }}</ul>
+
 {% endfor %}
 {{ request.session.is_story }}
 

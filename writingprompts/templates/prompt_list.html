@@ -1,3 +1,9 @@
 <p>Prompt_list</p>
+{% if prompt_list == None %}
+    <p><strong>prompt_list is empty</strong></p>
+{% endif %}
 
+{% for prompt in prompt_list %}
+    <ul><a href="{% url 'writingprompts:prompt' prompt.pk %}" </a>{{ prompt }}</ul>
+{% endfor %}
 <a href="{% url 'writingprompts:new_prompt' %}">New Prompt</a>
