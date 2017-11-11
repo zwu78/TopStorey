@@ -21,6 +21,7 @@ ompiled class file
 settings.py
 *.pyc
 *.idea
+*.sh
 db.sqlite3
 src
 migrations

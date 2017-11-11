@@ -1,22 +1,14 @@
 {% if request.session.is_story %}
     <ul>{{ story }}</ul>
-    <ul>PK: {{ story.pk }}</ul>
-    <ul>Content: {{ story.content }}</ul>
-
+<p>-----------------------------------------------</p>
     {% for childStory in child_story_list %}
-        <ul>{{ childStory }}</ul>
-        <ul>PK: {{ childStory.pk }}</ul>
-        <ul>Content: {{ childStory.content }}</ul>
+<ul><a href="{% url 'writingprompts:story' prompt_id childStory.id %}">{{ childStory }}</a></ul>
     {% endfor %}
-    <a href="{% url 'writingprompts:new_story' story.pk%}">New Story</a>
+    <a href="{% url 'writingprompts:new_story' prompt_id%}">New Story</a>
 {% else %}
     <p>{{ prompt }}</p>
-    <p>PK {{ prompt.pk }}</p>
-    <p>Content: {{ prompt.content }}</p>
     {% for childStory in child_story_list %}
         <ul>{{ childStory }}</ul>
-        <ul>PK: {{ childStory.pk }}</ul>
-        <ul>Content: {{ childStory.content }}</ul>
     {% endfor %}
 <a href="{% url 'writingprompts:new_story' prompt.pk %}">New Story</a>
 {% endif %}

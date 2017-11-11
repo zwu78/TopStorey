@@ -9,17 +9,17 @@ class Prompt(models.Model):
     author = models.ForeignKey(UserProfile)
     child_list = models.TextField(default='[]')
 
-    def __unicode__(self):
-        return self.title + ' - ' + self.content
+    def __str__(self):
+        return "Prompt " + str(self.pk) + "| child_list: " + self.child_list
 
 
 class Story(models.Model):
-    prompt = models.ForeignKey(Prompt, default=1)
+    prompt = models.BigIntegerField(null= True, blank=True)
 
     content = models.TextField()
     author = models.ForeignKey(UserProfile)
     parent_id = models.BigIntegerField(null=True, blank=True)
     child_list = models.TextField(default='[]')
 
-    def __unicode__(self):
-        return self.prompt + ' + ' + self.content
+    def __str__(self):
+        return "Story " + str(self.pk) + "| child_list: " + self.child_list + "parent_Id: " + str(self.parent_id)
