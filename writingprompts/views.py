@@ -106,3 +106,42 @@ def new_story(request, prompt_id):
     else:
         form = NewStoryForm()
     return render(request, 'new_story.html', {'form': form})
+
+# /writingprompts/1/story/1/new
+def new_story_with_storyId(request, prompt_id, story_id):
+    prompt = get_object_or_404(Prompt, pk=prompt_id)
+    if request.method == 'POST':
+        form = NewStoryForm(request.POST)
+        if form.is_valid():
+
+            new_story = form.save(commit=False)
+            new_story.author = request.user
+            new_story.save()
+            if request.session['is_story']:
+
+                new_story.prompt = prompt.pk
+                new_story.parent_id = story_id  # This is actually story_pk
+                new_story.save()
+                parentStory = get_object_or_404(Story, pk=story_id)  # This is actually story_pk
+                child_list = json.loads(parentStory.child_list)
+                child_list.append(new_story.id)
+                parentStory.child_list = json.dumps(child_list)
+
+                parentStory.save()
+
+                return redirect('writingprompts:story', prompt_id, parentStory.id)
+            else: # if not request.session['is_story']:
+
+                # Gets and add new story id to child_list
+                story_list = json.loads(prompt.child_list)
+                story_list.append(new_story.id)
+                prompt.child_list = json.dumps(story_list)
+                prompt.save()
+                new_story.save()
+
+                return redirect('writingprompts:prompt', prompt_id)
+
+    # First time visiting
+    else:
+        form = NewStoryForm()
+    return render(request, 'new_story.html', {'form': form})

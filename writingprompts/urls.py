@@ -19,4 +19,7 @@ urlpatterns = [
 
     # /writingprompts/1/story/new
     url(r'^(?P<prompt_id>[0-9]+)/story/new/$', views.new_story, name='new_story'),
+
+    # /writingprompts/1/story/1/new
+    url(r'^(?P<prompt_id>[0-9]+)/story/(?P<story_id>[0-9]+)/new/$', views.new_story_with_storyId, name='new_story_with_storyId'),
 ]

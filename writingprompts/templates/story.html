@@ -4,7 +4,7 @@
     {% for childStory in child_story_list %}
 <ul><a href="{% url 'writingprompts:story' prompt_id childStory.id %}">{{ childStory }}</a></ul>
     {% endfor %}
-    <a href="{% url 'writingprompts:new_story' prompt_id%}">New Story</a>
+    <a href="{% url 'writingprompts:new_story_with_storyId' prompt_id story.id %}">New Story</a>
 {% else %}
     <p>{{ prompt }}</p>
     {% for childStory in child_story_list %}
